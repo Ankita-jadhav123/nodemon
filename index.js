@@ -3,12 +3,14 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose=require('mongoose')
 const User=require('./models/User')
+const Productroutes=require('./routes/Productroutes')
 
 
 
 const server = express();
 server.use(cors());
 server.use(bodyParser.json());
+server.use('/Product',Productroutes)
 
 //connet atlast cloud db
 
@@ -22,7 +24,7 @@ server.post('/register',async(req,res)=>{
         const userObj=new User({fullName,userName,age,password})
         await userObj.save()
         res.json({
-            status:true,message:'user added'
+            status:true,message:'registration successfully'
         })
     }catch(err){
         res.json({
